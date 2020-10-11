@@ -1,0 +1,17 @@
+const { MessageEmbed } = require('discord.js')
+exports.run = async (client, message, args) => {
+  let embed = new MessageEmbed()
+  .setAuthor(`${message.guild.name}`, message.guild.iconURL({dynamic: true}))
+  .setThumbnail(message.guild.iconURL({dynamic: true}))
+  .setColor("BLUE")
+  .addField("Server Name", message.guild.name)
+  .addField("Owner", `${message.guild.owner}`)
+  .addField("Server Region", message.guild.region)
+  .addField("Verification Level", message.guild.verificationLevel)
+  .addField("Guild Created On", message.guild.createdAt.toString())
+  .addField("You Joined On", message.guild.joinedAt.toString())
+  .addField("User Count", message.guild.memberCount)
+  .addField("Member Count", message.guild.members.cache.filter(m => !m.user.bot).size)
+  .addField("Bot Count", message.guild.members.cache.filter(m => m.user.bot).size)
+  message.channel.send(embed)
+}
